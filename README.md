@@ -207,7 +207,7 @@ Dashboard, karena semua akun baru (lewat `/register`) otomatis berperan
 5. Buka **SQL Editor**, jalankan (ganti `GANTI_UUID_INI` dan nama):
    ```sql
    insert into public.profiles (id, full_name, role, gender)
-   values ('GANTI_UUID_INI', 'Nama Anda', 'super_admin', 'male');
+   values ('28086580-c9b6-494f-8f71-ecd8691c4143', 'The Bouncer', 'super_admin', 'male');
    ```
 6. Login ke aplikasi pakai email & password yang baru dibuat — Anda
    sekarang punya akses penuh ke Admin Dashboard, termasuk halaman

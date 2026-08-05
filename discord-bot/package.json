@@ -1,0 +1,16 @@
+{
+  "name": "sma1-cikembar-discord-bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Notification bridge Discord untuk Asset Management System SMA Negeri 1 Cikembar. Hanya mengirim notifikasi approval — tidak menerima command apa pun.",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.111.0",
+    "discord.js": "14.27.0",
+    "dotenv": "16.4.5"
+  }
+}

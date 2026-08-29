@@ -10,7 +10,25 @@ const PUBLIC_PATHS = ['/', '/login', '/register', '/terms', '/terms-of-use', '/p
 const ADMIN_ONLY_PREFIX = '/admin';
 
 export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({ request: { headers: request.headers } });
+  // GitHub Codespaces meneruskan request ke Next.js dengan:
+  //   Origin: localhost:<port>
+  //   X-Forwarded-Host: <codespace>.app.github.dev
+  // Next.js Server Actions membandingkan keduanya untuk proteksi CSRF.
+  // Saat development di Codespaces, samakan forwarded host dengan Origin.
+  // Hanya berlaku untuk POST di development; production tidak disentuh.
+  const requestHeaders = new Headers(request.headers);
+  if (process.env.NODE_ENV !== 'production' && request.method === 'POST') {
+    const origin = request.headers.get('origin');
+    if (origin) {
+      try {
+        requestHeaders.set('x-forwarded-host', new URL(origin).host);
+      } catch {
+        // Biarkan Next.js menangani Origin yang tidak valid seperti biasa.
+      }
+    }
+  }
+
+  let response = NextResponse.next({ request: { headers: requestHeaders } });
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -22,13 +40,13 @@ export async function middleware(request: NextRequest) {
         },
         set(name: string, value: string, options: CookieOptions) {
           request.cookies.set({ name, value, ...options });
-          response = NextResponse.next({ request: { headers: request.headers } });
-          response.cookies.set({ name, value, ...options });
+          response = NextResponse.next({ request: { headers: requestHeaders } });
+          response.cookies.set(name, value, options);
         },
         remove(name: string, options: CookieOptions) {
           request.cookies.set({ name, value: '', ...options });
-          response = NextResponse.next({ request: { headers: request.headers } });
-          response.cookies.set({ name, value: '', ...options });
+          response = NextResponse.next({ request: { headers: requestHeaders } });
+          response.cookies.set(name, '', options);
         },
       },
     }

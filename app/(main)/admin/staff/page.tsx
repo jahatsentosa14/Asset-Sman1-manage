@@ -17,14 +17,28 @@ export default async function StaffPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Kelola Akun Guru &amp; Admin</h1>
-          <p className="text-muted-foreground">Buat akun untuk Guru dan Admin baru.</p>
+          <h1 className="text-2xl font-bold tracking-tight">
+            Kelola Akun Guru &amp; Admin
+          </h1>
+          <p className="text-muted-foreground">
+            Buat akun untuk Guru dan Admin baru.
+          </p>
         </div>
-        <Link href="/admin/staff/new">
-          <Button size="sm">
-            <Plus size={16} /> Buat Akun
-          </Button>
-        </Link>
+
+        <div className="flex items-center gap-2">
+          <Link href="/admin/staff/import">
+            <Button variant="outline" size="sm">
+              Import Guru
+            </Button>
+          </Link>
+
+          <Link href="/admin/staff/new">
+            <Button size="sm">
+              <Plus size={16} />
+              Buat Akun
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {!staff || staff.length === 0 ? (

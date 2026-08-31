@@ -4,9 +4,16 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { SiteFooter } from '@/components/site-footer';
 import './globals.css';
 
+const SCHOOL_LOGO = 'https://i.imgur.com/Dxdk4mq.png';
+
 export const metadata: Metadata = {
-  title: 'Asset Management — SMA Negeri 1 Cikembar',
-  description: 'Sistem peminjaman asset, ATK, dan stock opname SMA Negeri 1 Cikembar.',
+  title: 'Asset SMAN 1 Cikembar',
+  description: 'Sistem peminjaman asset, ATK, dan stock opname SMAN 1 Cikembar.',
+  icons: {
+    icon: [{ url: SCHOOL_LOGO }],
+    shortcut: [SCHOOL_LOGO],
+    apple: [{ url: SCHOOL_LOGO }],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

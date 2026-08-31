@@ -52,18 +52,18 @@ export default async function HomePage() {
   return (
     <div className="space-y-8">
       <div className="flex items-start justify-between gap-4">
-        <div><h1 className="text-2xl font-black tracking-tight text-[#0f03ff]">{greeting.title}</h1><p className="text-muted-foreground">{greeting.subtitle}</p></div>
+        <div><h1 className="text-2xl font-black tracking-tight text-[#1A123B]">{greeting.title}</h1><p className="text-muted-foreground">{greeting.subtitle}</p></div>
         <RealtimeRefresher tables={['loans', 'atk_requests', 'assets', 'atk_items']} />
       </div>
 
       <HomeShortcuts role={profile?.role ?? 'student'} />
       <HomeInsights activities={activities} assetRanks={assetRanks} atkRanks={atkRanks} />
 
-      {grouped.length > 0 && <FadeIn className="glass-panel rounded-3xl p-5 sm:p-7"><div className="mb-6"><h2 className="text-xl font-black">Informasi Sekolah</h2><p className="text-sm text-muted-foreground">Denah, tata ruang, luas tanah, dan daftar ruangan.</p></div><InformationGallery grouped={grouped} /></FadeIn>}
+      {grouped.length > 0 && <FadeIn className="glass-panel rounded-3xl p-5 sm:p-7"><div className="mb-6"><p className="text-xs font-bold uppercase tracking-[.18em] text-[#FDBB2D]">School Information</p><h2 className="mt-1 text-xl font-black text-[#1A123B]">Informasi Sekolah</h2><p className="text-sm text-muted-foreground">Denah, tata ruang, luas tanah, dan daftar ruangan.</p></div><InformationGallery grouped={grouped} /></FadeIn>}
 
       {activeLoans.length > 0 && (
-        <FadeIn className="space-y-3"><h2 className="text-lg font-semibold">Pinjaman Aktif Anda</h2><div className="space-y-3">
-          {activeLoans.map((loan) => <div key={loan.id} className="glass-panel flex items-center justify-between rounded-2xl p-4 transition-all duration-300 hover:-translate-y-0.5">
+        <FadeIn className="space-y-3"><h2 className="text-lg font-semibold text-[#1A123B]">Pinjaman Aktif Anda</h2><div className="space-y-3">
+          {activeLoans.map((loan) => <div key={loan.id} className="glass-panel flex items-center justify-between rounded-2xl p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#FDBB2D]">
             <div className="flex items-center gap-3"><div className="flex -space-x-2">{loan.loan_items.slice(0, 3).map((item, idx) => <div key={idx} className="h-10 w-10 overflow-hidden rounded-lg border-2 border-background bg-muted">{item.assets?.image_url ? <Image src={item.assets.image_url} alt={item.assets.name} width={40} height={40} className="h-full w-full object-cover" /> : null}</div>)}</div><div><p className="text-sm font-medium">{loan.loan_items.map((i) => i.assets?.name).join(', ')}</p><p className="text-xs text-muted-foreground">{new Date(loan.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p></div></div>
             <LoanStatusBadge status={loan.status} />
           </div>)}

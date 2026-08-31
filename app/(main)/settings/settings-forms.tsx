@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { ImageUpload } from '@/components/image-upload';
 import { LanguageSection } from './language-section';
+import { NotificationPreferencesSection } from './notification-preferences-section';
 import { StaggerContainer, StaggerItem } from '@/components/motion/fade-in';
 import { updateFullNameAction, updatePasswordAction, updateAvatarAction, type SettingsActionState } from './actions';
 
@@ -52,6 +53,7 @@ export function SettingsForms({ userId, fullName, email, role, avatarUrl }: {
   }, [passwordState]);
 
   const panel = 'space-y-3 rounded-2xl border border-border bg-white/85 p-5 shadow-[0_8px_28px_rgba(26,18,59,.07)] backdrop-blur-xl';
+  const isAdmin = role === 'admin' || role === 'super_admin';
 
   return (
     <StaggerContainer className="space-y-6">
@@ -86,6 +88,8 @@ export function SettingsForms({ userId, fullName, email, role, avatarUrl }: {
       </StaggerItem>
 
       <StaggerItem><LanguageSection /></StaggerItem>
+
+      {isAdmin && <StaggerItem><NotificationPreferencesSection /></StaggerItem>}
 
       <StaggerItem>
         <section className={panel}>

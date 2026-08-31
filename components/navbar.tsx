@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -55,7 +54,7 @@ export function Navbar({ fullName, role }: { fullName: string; role: string }) {
     <header className="sticky top-0 z-40 border-b border-[#0f03ff]/10 bg-white/90 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link href="/home" className="flex items-center gap-2.5 font-bold tracking-tight text-[#0f03ff] transition-transform duration-300 hover:scale-[1.02]">
-          <Image src={SCHOOL_LOGO} alt="Logo SMAN 1 Cikembar" width={34} height={34} className="h-9 w-9 object-contain" unoptimized />
+          <img src={SCHOOL_LOGO} alt="Logo SMAN 1 Cikembar" width={34} height={34} className="h-9 w-9 object-contain" />
           <span>SMAN 1 CIKEMBAR</span>
         </Link>
         <nav className="hidden gap-1 sm:flex">

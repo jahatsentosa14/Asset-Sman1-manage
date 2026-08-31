@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 import { ThemeProvider } from '@/components/theme-provider';
+import { SiteFooter } from '@/components/site-footer';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -10,10 +11,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" suppressHydrationWarning>
-      <body className="min-h-screen antialiased">
+    <html lang="id">
+      <body className="flex min-h-screen flex-col antialiased">
         <ThemeProvider>
-          {children}
+          <div className="flex min-h-screen flex-1 flex-col">
+            <div className="flex-1">{children}</div>
+            <SiteFooter />
+          </div>
           <Toaster richColors position="top-right" closeButton />
         </ThemeProvider>
       </body>

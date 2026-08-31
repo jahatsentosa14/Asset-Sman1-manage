@@ -22,15 +22,17 @@ export default function DisclaimerPage() {
       <h2>3. Batasan Tanggung Jawab</h2>
       <p>
         Sekolah tidak bertanggung jawab atas kerugian tidak langsung yang timbul dari penggunaan
-        atau ketidaktersediaan Layanan, termasuk namun tidak terbatas pada kehilangan
-        kesempatan meminjam barang akibat gangguan teknis.
+        atau ketidaktersediaan Layanan, termasuk namun tidak terbatas pada kehilangan kesempatan
+        meminjam barang akibat gangguan teknis.
       </p>
 
-      <h2>4. Tautan &amp; Integrasi Pihak Ketiga</h2>
+      <h2>4. Layanan Pendukung Pihak Ketiga</h2>
       <p>
-        Layanan terintegrasi dengan pihak ketiga (Supabase, Discord) untuk fungsi autentikasi,
-        penyimpanan data, dan notifikasi. Sekolah tidak bertanggung jawab atas gangguan yang
-        berasal dari layanan pihak ketiga tersebut.
+        Layanan dapat menggunakan penyedia pihak ketiga untuk fungsi teknis tertentu, seperti
+        autentikasi pengguna, penyimpanan dan pemrosesan data, hosting aplikasi, serta pengiriman
+        notifikasi. Penyedia tersebut digunakan hanya untuk mendukung operasional Layanan dan
+        dapat memiliki kebijakan serta ketentuan layanan masing-masing. Sekolah tidak bertanggung
+        jawab atas gangguan yang secara langsung berasal dari layanan pendukung tersebut.
       </p>
     </LegalLayout>
   );

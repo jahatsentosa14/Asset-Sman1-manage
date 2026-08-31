@@ -4,7 +4,7 @@ export default function TermsOfUsePage() {
   return (
     <LegalLayout title="Terms of Use">
       <p>
-        Terakhir diperbarui: 30 Juli 2026. Halaman ini menjelaskan aturan penggunaan yang wajar
+        Terakhir diperbarui: 1 September 2026. Halaman ini menjelaskan aturan penggunaan yang wajar
         dan tidak wajar atas Asset Management System SMA Negeri 1 Cikembar.
       </p>
 

@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { AtkItemForm } from '../../atk-item-form';
-import { updateAtkItemAction, type AtkItemActionState } from '../../actions';
+import { updateAtkItemAction } from '../../actions';
 
 export default async function EditAtkItemPage({ params }: { params: { id: string } }) {
   const supabase = createClient();
@@ -14,8 +14,7 @@ export default async function EditAtkItemPage({ params }: { params: { id: string
 
   if (!item) notFound();
 
-  const boundAction = async (state: AtkItemActionState, formData: FormData) =>
-    updateAtkItemAction(item.id, state, formData);
+  const boundAction = updateAtkItemAction.bind(null, item.id);
 
   return (
     <div className="space-y-6">

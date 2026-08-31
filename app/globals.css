@@ -4,17 +4,17 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%;
-    --foreground: 236 83% 10%;
-    --primary: 241 100% 50%;
+    --background: 42 100% 98%;
+    --foreground: 216 61% 15%;
+    --primary: 216 61% 15%;
     --primary-foreground: 0 0% 100%;
     --accent: 48 100% 67%;
-    --accent-foreground: 236 83% 10%;
-    --muted: 240 20% 94%;
-    --muted-foreground: 236 12% 42%;
+    --accent-foreground: 216 61% 15%;
+    --muted: 42 25% 94%;
+    --muted-foreground: 216 15% 42%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 236 25% 88%;
+    --border: 216 20% 86%;
     --radius: 1rem;
   }
 
@@ -22,12 +22,13 @@
   html { scroll-behavior: smooth; }
   body {
     @apply bg-background text-foreground;
-    background-image: radial-gradient(circle at 10% 0%, rgba(15,3,255,.08), transparent 32%), radial-gradient(circle at 90% 20%, rgba(255,219,88,.10), transparent 28%);
+    background-image: radial-gradient(circle at 10% 0%, rgba(11,31,58,.08), transparent 32%), radial-gradient(circle at 90% 20%, rgba(255,219,88,.14), transparent 28%);
   }
-  ::selection { background: #FFDB58; color: #0f03ff; }
+  ::selection { background: #FFDB58; color: #0B1F3A; }
 }
 
 @layer utilities {
-  .glass-panel { @apply border border-white/50 bg-white/45 shadow-lg backdrop-blur-xl; }
-  .clay-panel { @apply border border-white/60 bg-white/75 backdrop-blur-xl; box-shadow: inset 2px 2px 5px rgba(255,255,255,.9), inset -3px -3px 8px rgba(15,3,255,.08), 8px 10px 25px rgba(15,3,255,.10); }
+  .glass-panel { @apply border border-white/55 bg-white/50 shadow-lg backdrop-blur-xl; }
+  .clay-panel { @apply border border-white/70 bg-white/80 backdrop-blur-xl; box-shadow: inset 2px 2px 5px rgba(255,255,255,.95), inset -3px -3px 8px rgba(11,31,58,.08), 8px 10px 25px rgba(11,31,58,.12); }
+  .navy-gradient { background: linear-gradient(135deg, #0B1F3A 0%, #16365f 100%); }
 }

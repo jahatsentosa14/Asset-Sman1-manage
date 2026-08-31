@@ -1,9 +1,11 @@
 'use client';
 
+import Image from 'next/image';
 import { useFormState, useFormStatus } from 'react-dom';
 import { loginAction, type AuthActionState } from '../actions';
 
 const initialState: AuthActionState = { error: null };
+const SCHOOL_LOGO = 'https://i.imgur.com/Dxdk4mq.png';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -18,11 +20,32 @@ export default function LoginPage() {
   const [state, formAction] = useFormState(loginAction, initialState);
 
   return (
-    <main className="flex min-h-[calc(100vh-150px)] items-center justify-center px-6 py-12">
+    <main className="flex min-h-[calc(100vh-150px)] flex-col items-center px-6 py-12">
+      <div className="mb-8 flex w-full max-w-md items-center justify-between">
+        <span className="text-lg font-black tracking-tight text-[#1A123B]">SMAN 1 CIKEMBAR</span>
+        <Image
+          src={SCHOOL_LOGO}
+          alt="Logo SMAN 1 Cikembar"
+          width={44}
+          height={44}
+          className="h-11 w-11 object-contain"
+          unoptimized
+        />
+      </div>
+
       <div className="w-full max-w-md">
         <div className="clay-panel rounded-[2rem] p-7 sm:p-9">
           <div className="mb-8 space-y-2 text-center">
-            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#1A123B] text-xl font-black text-white shadow-[inset_2px_2px_5px_rgba(255,255,255,.2),6px_8px_18px_rgba(26,18,59,.20)]">S1</div>
+            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#1A123B] shadow-[inset_2px_2px_5px_rgba(255,255,255,.2),6px_8px_18px_rgba(26,18,59,.20)]">
+              <Image
+                src={SCHOOL_LOGO}
+                alt="Logo SMAN 1 Cikembar"
+                width={48}
+                height={48}
+                className="h-12 w-12 object-contain"
+                unoptimized
+              />
+            </div>
             <h1 className="text-3xl font-black tracking-tight text-[#1A123B]">Selamat Datang</h1>
             <p className="text-sm text-muted-foreground">Masuk menggunakan akun sekolah Anda.</p>
           </div>

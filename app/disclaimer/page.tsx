@@ -3,7 +3,7 @@ import { LegalLayout } from '@/components/legal-layout';
 export default function DisclaimerPage() {
   return (
     <LegalLayout title="Disclaimer">
-      <p>Terakhir diperbarui: 30 Juli 2026.</p>
+      <p>Terakhir diperbarui: 1 September 2026.</p>
 
       <h2>1. Ketersediaan Layanan</h2>
       <p>

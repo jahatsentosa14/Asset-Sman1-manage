@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { getAssetCategories } from '@/services/assets';
 import { AssetForm } from '../../asset-form';
-import { updateAssetAction, type AssetActionState } from '../../actions';
+import { updateAssetAction } from '../../actions';
 
 export default async function EditAssetPage({ params }: { params: { id: string } }) {
   const supabase = createClient();
@@ -18,8 +18,7 @@ export default async function EditAssetPage({ params }: { params: { id: string }
 
   if (!asset) notFound();
 
-  const boundAction = async (state: AssetActionState, formData: FormData) =>
-    updateAssetAction(asset.id, state, formData);
+  const boundAction = updateAssetAction.bind(null, asset.id);
 
   return (
     <div className="space-y-6">

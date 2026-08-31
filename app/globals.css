@@ -4,36 +4,30 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
-    --primary: 221 83% 53%;
+    --background: 0 0% 98%;
+    --foreground: 236 83% 10%;
+    --primary: 241 100% 50%;
     --primary-foreground: 0 0% 100%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    --accent: 48 100% 67%;
+    --accent-foreground: 236 83% 10%;
+    --muted: 240 20% 94%;
+    --muted-foreground: 236 12% 42%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 214 32% 91%;
-    --radius: 0.75rem;
+    --border: 236 25% 88%;
+    --radius: 1rem;
   }
 
-  .dark {
-    --background: 222 47% 8%;
-    --foreground: 210 40% 98%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 8%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217 33% 20%;
-    --radius: 0.75rem;
-  }
-
-  * {
-    @apply border-border;
-  }
-
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
   body {
     @apply bg-background text-foreground;
+    background-image: radial-gradient(circle at 10% 0%, rgba(15,3,255,.08), transparent 32%), radial-gradient(circle at 90% 20%, rgba(255,219,88,.10), transparent 28%);
   }
+  ::selection { background: #FFDB58; color: #0f03ff; }
+}
+
+@layer utilities {
+  .glass-panel { @apply border border-white/50 bg-white/45 shadow-lg backdrop-blur-xl; }
+  .clay-panel { @apply border border-white/60 bg-white/75 backdrop-blur-xl; box-shadow: inset 2px 2px 5px rgba(255,255,255,.9), inset -3px -3px 8px rgba(15,3,255,.08), 8px 10px 25px rgba(15,3,255,.10); }
 }

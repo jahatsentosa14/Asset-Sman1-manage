@@ -5,11 +5,11 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 253 52% 15%;
-    --primary: 253 52% 15%;
+    --foreground: 240 100% 25%;
+    --primary: 240 100% 25%;
     --primary-foreground: 0 0% 100%;
     --accent: 41 98% 58%;
-    --accent-foreground: 253 52% 15%;
+    --accent-foreground: 240 100% 25%;
     --muted: 0 0% 97%;
     --muted-foreground: 0 0% 40%;
     --destructive: 0 84% 60%;
@@ -24,9 +24,9 @@
     @apply bg-background text-foreground;
     background-image:
       radial-gradient(circle at 8% 0%, rgba(253,187,45,.10), transparent 26%),
-      radial-gradient(circle at 94% 18%, rgba(26,18,59,.07), transparent 30%);
+      radial-gradient(circle at 94% 18%, rgba(0,0,128,.07), transparent 30%);
   }
-  ::selection { background: #FDBB2D; color: #1A123B; }
+  ::selection { background: #FDBB2D; color: #000080; }
 }
 
 @layer utilities {
@@ -43,16 +43,16 @@
     backdrop-filter: blur(22px);
     box-shadow:
       inset 2px 2px 7px rgba(255,255,255,.95),
-      inset -4px -4px 10px rgba(26,18,59,.06),
-      0 12px 32px rgba(26,18,59,.12);
+      inset -4px -4px 10px rgba(0,0,128,.06),
+      0 12px 32px rgba(0,0,128,.12);
   }
 
   .navy-gradient {
-    background: linear-gradient(135deg, #1A123B 0%, #30245d 100%);
+    background: linear-gradient(135deg, #000080 0%, #1919a6 100%);
   }
 
   .mustard-accent {
-    background: #FDBB2D;
-    color: #1A123B;
+    background: #FFDB58;
+    color: #000080;
   }
 }

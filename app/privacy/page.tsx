@@ -4,7 +4,7 @@ export default function PrivacyPolicyPage() {
   return (
     <LegalLayout title="Privacy Policy">
       <p>
-        Terakhir diperbarui: 30 Juli 2026. Kebijakan ini menjelaskan data pribadi apa saja yang
+        Terakhir diperbarui: 1 September 2026. Kebijakan ini menjelaskan data pribadi apa saja yang
         dikumpulkan Asset Management System SMAN 1 Cikembar dan bagaimana data tersebut digunakan.
       </p>
 

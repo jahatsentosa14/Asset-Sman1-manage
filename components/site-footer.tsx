@@ -9,7 +9,7 @@ const LEGAL_LINKS = [
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t border-[#0f03ff]/10 bg-[#0f03ff] px-4 py-8 text-white">
+    <footer className="mt-auto border-t border-[#000080]/10 bg-[#000080] px-4 py-8 text-white">
       <div className="mx-auto max-w-6xl space-y-3 text-center">
         <p className="text-sm font-semibold">Made with <span aria-label="love">❤️</span> by Loonareen Studios</p>
         <p className="text-xs text-white/70">SMARSI — All Rights Reserved 2026</p>

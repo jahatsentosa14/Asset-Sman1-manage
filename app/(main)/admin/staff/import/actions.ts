@@ -15,6 +15,7 @@ const teacherSchema = z.object({
 export type BulkImportState = {
   error: string | null;
   success: number;
+  updated: number;
   failed: string[];
 };
 
@@ -43,77 +44,108 @@ export async function importTeacherAccountsAction(
   try {
     teachers = JSON.parse(String(formData.get('teachers') ?? '[]'));
   } catch {
-    return { error: 'Data import tidak valid.', success: 0, failed: [] };
+    return { error: 'Data import tidak valid.', success: 0, updated: 0, failed: [] };
   }
 
   if (!Array.isArray(teachers) || teachers.length === 0) {
-    return { error: 'Tidak ada data guru untuk diimport.', success: 0, failed: [] };
+    return { error: 'Tidak ada data guru untuk diimport.', success: 0, updated: 0, failed: [] };
   }
 
   if (teachers.length > 500) {
-    return { error: 'Maksimal 500 akun guru per import.', success: 0, failed: [] };
+    return { error: 'Maksimal 500 akun guru per import.', success: 0, updated: 0, failed: [] };
   }
 
   try {
     await assertIsAdmin();
   } catch {
-    return { error: 'Anda tidak memiliki akses untuk aksi ini.', success: 0, failed: [] };
+    return { error: 'Anda tidak memiliki akses untuk aksi ini.', success: 0, updated: 0, failed: [] };
   }
 
-  const parsedTeachers = teachers.map((teacher, index) => {
-    const parsed = teacherSchema.safeParse(teacher);
-    return { index, parsed };
-  });
+  const parsedTeachers = teachers.map((teacher, index) => ({
+    index,
+    parsed: teacherSchema.safeParse(teacher),
+  }));
 
   const invalid = parsedTeachers.filter((item) => !item.parsed.success);
   if (invalid.length > 0) {
     return {
       error: `Data guru pada baris ${invalid.map((item) => item.index + 2).join(', ')} tidak valid.`,
       success: 0,
+      updated: 0,
       failed: [],
     };
   }
 
   const adminClient = createAdminClient();
+  const { data: usersData, error: listUsersError } = await adminClient.auth.admin.listUsers({ page: 1, perPage: 1000 });
+
+  if (listUsersError) {
+    return { error: 'Gagal membaca daftar akun Auth.', success: 0, updated: 0, failed: [] };
+  }
+
+  const existingByEmail = new Map(
+    usersData.users
+      .filter((user) => user.email)
+      .map((user) => [user.email!.trim().toLowerCase(), user])
+  );
+
   let success = 0;
+  let updated = 0;
   const failed: string[] = [];
 
   for (const item of parsedTeachers) {
     if (!item.parsed.success) continue;
 
     const { fullName, email, password, gender } = item.parsed.data;
-    const { data: created, error: createError } = await adminClient.auth.admin.createUser({
-      email,
-      password,
-      email_confirm: true,
-    });
+    const normalizedEmail = email.trim().toLowerCase();
+    const existing = existingByEmail.get(normalizedEmail);
+    let userId: string;
+    let createdNew = false;
 
-    if (createError || !created.user) {
-      const message = createError?.message?.toLowerCase() ?? '';
-      failed.push(
-        `Baris ${item.index + 2} (${email}): ${
-          message.includes('already registered') || createError?.code === 'email_exists'
-            ? 'Email sudah terdaftar.'
-            : 'Gagal membuat akun.'
-        }`
-      );
-      continue;
+    if (existing) {
+      const { data: updatedUser, error: updateError } = await adminClient.auth.admin.updateUserById(existing.id, {
+        password,
+        email_confirm: true,
+      });
+
+      if (updateError || !updatedUser.user) {
+        failed.push(`Baris ${item.index + 2} (${email}): Gagal menyinkronkan akun login.`);
+        continue;
+      }
+
+      userId = existing.id;
+    } else {
+      const { data: created, error: createError } = await adminClient.auth.admin.createUser({
+        email: normalizedEmail,
+        password,
+        email_confirm: true,
+      });
+
+      if (createError || !created.user) {
+        failed.push(`Baris ${item.index + 2} (${email}): Gagal membuat akun Auth.`);
+        continue;
+      }
+
+      userId = created.user.id;
+      createdNew = true;
+      existingByEmail.set(normalizedEmail, created.user);
     }
 
-    const { error: profileError } = await adminClient.from('profiles').insert({
-      id: created.user.id,
+    const { error: profileError } = await adminClient.from('profiles').upsert({
+      id: userId,
       full_name: fullName,
       role: 'teacher',
       gender,
-    });
+    }, { onConflict: 'id' });
 
     if (profileError) {
-      await adminClient.auth.admin.deleteUser(created.user.id);
-      failed.push(`Baris ${item.index + 2} (${email}): Gagal menyimpan profil.`);
+      if (createdNew) await adminClient.auth.admin.deleteUser(userId);
+      failed.push(`Baris ${item.index + 2} (${email}): Gagal menyimpan profil Guru.`);
       continue;
     }
 
-    success += 1;
+    if (createdNew) success += 1;
+    else updated += 1;
   }
 
   revalidatePath('/admin/staff');
@@ -121,6 +153,7 @@ export async function importTeacherAccountsAction(
   return {
     error: null,
     success,
+    updated,
     failed,
   };
 }

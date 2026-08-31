@@ -4,7 +4,7 @@ export default function TermsOfServicePage() {
   return (
     <LegalLayout title="Terms of Service">
       <p>
-        Terakhir diperbarui: 30 Juli 2026. Dokumen ini mengatur syarat dan ketentuan penggunaan
+        Terakhir diperbarui: 1 September 2026. Dokumen ini mengatur syarat dan ketentuan penggunaan
         Asset Management System SMA Negeri 1 Cikembar (&ldquo;Layanan&rdquo;) oleh seluruh warga
         sekolah, meliputi siswa, guru, dan admin.
       </p>

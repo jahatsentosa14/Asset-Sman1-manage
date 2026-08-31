@@ -4,17 +4,17 @@
 
 @layer base {
   :root {
-    --background: 42 100% 98%;
-    --foreground: 216 61% 15%;
-    --primary: 216 61% 15%;
+    --background: 0 0% 100%;
+    --foreground: 253 52% 15%;
+    --primary: 253 52% 15%;
     --primary-foreground: 0 0% 100%;
-    --accent: 48 100% 67%;
-    --accent-foreground: 216 61% 15%;
-    --muted: 42 25% 94%;
-    --muted-foreground: 216 15% 42%;
+    --accent: 41 98% 58%;
+    --accent-foreground: 253 52% 15%;
+    --muted: 0 0% 97%;
+    --muted-foreground: 0 0% 40%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 216 20% 86%;
+    --border: 0 0% 90%;
     --radius: 1rem;
   }
 
@@ -22,13 +22,37 @@
   html { scroll-behavior: smooth; }
   body {
     @apply bg-background text-foreground;
-    background-image: radial-gradient(circle at 10% 0%, rgba(11,31,58,.08), transparent 32%), radial-gradient(circle at 90% 20%, rgba(255,219,88,.14), transparent 28%);
+    background-image:
+      radial-gradient(circle at 8% 0%, rgba(253,187,45,.10), transparent 26%),
+      radial-gradient(circle at 94% 18%, rgba(26,18,59,.07), transparent 30%);
   }
-  ::selection { background: #FFDB58; color: #0B1F3A; }
+  ::selection { background: #FDBB2D; color: #1A123B; }
 }
 
 @layer utilities {
-  .glass-panel { @apply border border-white/55 bg-white/50 shadow-lg backdrop-blur-xl; }
-  .clay-panel { @apply border border-white/70 bg-white/80 backdrop-blur-xl; box-shadow: inset 2px 2px 5px rgba(255,255,255,.95), inset -3px -3px 8px rgba(11,31,58,.08), 8px 10px 25px rgba(11,31,58,.12); }
-  .navy-gradient { background: linear-gradient(135deg, #0B1F3A 0%, #16365f 100%); }
+  .glass-panel {
+    border: 1px solid rgba(229,229,229,.9);
+    background: rgba(255,255,255,.72);
+    box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    backdrop-filter: blur(20px);
+  }
+
+  .clay-panel {
+    border: 1px solid rgba(255,255,255,.9);
+    background: rgba(255,255,255,.82);
+    backdrop-filter: blur(22px);
+    box-shadow:
+      inset 2px 2px 7px rgba(255,255,255,.95),
+      inset -4px -4px 10px rgba(26,18,59,.06),
+      0 12px 32px rgba(26,18,59,.12);
+  }
+
+  .navy-gradient {
+    background: linear-gradient(135deg, #1A123B 0%, #30245d 100%);
+  }
+
+  .mustard-accent {
+    background: #FDBB2D;
+    color: #1A123B;
+  }
 }
